@@ -3,6 +3,12 @@ var require = patchRequire(require);
 var fs = require('fs');
 //write a test file
 
+//Define GET method parameters
+const qunarUrl = 'https://flight.qunar.com/site/oneway_list.htm?';
+const getDepartrue = 'searchDepartureAirport=';
+const getArrival = '&searchArrivalAirport=';
+const getDate = '&searchDepartureTime=';
+
 exports.check_path = function (departure, destination, date)
 {
         //build a browser
@@ -28,8 +34,8 @@ exports.check_path = function (departure, destination, date)
         });
 
         //build url for inquiry: date is current day, city should be obtained from a profile.
-    casper.start('https://flight.qunar.com/site/oneway_list.htm?searchDepartureAirport=' + departure + '&searchArrivalAirport=' + destination +
-                    '&searchDepartureTime=' + date);
+    casper.start(quanrUrl + getDepartrue + departure + getArrival + destination +
+                    getDate + date);
 
         casper.waitFor(
             function check() {
